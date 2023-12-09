@@ -1,5 +1,6 @@
 import React from 'react'
 import { media, style } from 'typestyle'
+import { FilterButton } from '../components/FilterButton'
 
 export const Header = () => {
   return (
@@ -10,7 +11,7 @@ export const Header = () => {
             </figure>
         </section>
         <section className={headerSectionBottom}>
-            <div className={divExample}></div>
+           <FilterButton />
         </section>
     </header>
   )
@@ -67,14 +68,3 @@ const headerLogo = style({
     width:'96px',
     height:'19px',
 })
-
-const divExample = style(
-    {
-        width:' 297px',
-        height: '55px',
-        flexShrink: 0,
-        borderRadius: '16px',
-        background: '#FFF',
-       boxShadow:' 0px 1px 6px 0px rgba(0, 0, 0, 0.10)'
-    }
-)

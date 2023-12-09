@@ -1,7 +1,82 @@
 import React from 'react'
+import { classes, media, style } from 'typestyle'
+import { CloseIcon } from '../assets'
 
-export const FilterModal = () => {
+interface FilterModalProps{
+    isShow:boolean,
+    setIsShow:React.Dispatch<React.SetStateAction<boolean>>
+}
+export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow}) => {
+   
   return (
-    <div>FilterModal</div>
+    <div className={classes(modalWrapper, style({display:isShow?'block':'none'}))}>
+        <section className={modalContainer}>
+            <div className={modalHeader}>
+                <h5 className={modalTitle}>Edit your search</h5>
+                <figure className={style({cursor:'pointer'})} onClick={()=>setIsShow(false)}>
+                    <CloseIcon />
+                </figure> 
+            </div>
+            <div className={modalFooter}>
+
+            </div>
+        </section>
+    </div>
   )
 }
+
+const modalWrapper = style(
+    {
+        position:'fixed',
+        top:0,
+        left:0,
+        bottom:0,
+        right:0,
+        backgroundColor: 'rgba(79, 79, 79, 0.40)',
+    }
+)
+const modalContainer = style(
+    {
+        width: '100%',
+        height: 'auto',
+        flexShrink: 0,     
+        backgroundColor:'#FFFFFFFF',
+        padding:'18px 22px',
+    },
+    media(
+        {minWidth:1366},
+        {
+            padding:'93px 96px'
+        }
+    )
+)
+const modalHeader = style(
+    {
+        width:'100%',
+        height:'auto',
+        display:'flex',
+        justifyContent:'space-between',
+        alignItems:'center',
+    }
+)
+
+const modalTitle = style(
+    {
+        color: '#333',
+        fontFamily: 'Mulish',
+        fontSize: '12px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: 'normal',   
+    }
+)
+
+const modalFooter = style(
+    {
+        width:'100%',
+        height:'48px',
+        display:'flex',
+        justifyContent:'center',
+        backgroundColor:'red'
+    }
+)

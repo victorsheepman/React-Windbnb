@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { media, style } from 'typestyle'
 import { FilterButton } from '../components/FilterButton'
 import { LocationEnum } from '../schemas'
+import { FilterModal } from '../components/FilterModal'
 
 export const Header = () => {
-
+    const [isShow, setIsShow] = useState<boolean>(false)
   return (
     <header className={headerWrapper}>
         <section className={headerSectionLogo}>
@@ -13,8 +14,9 @@ export const Header = () => {
             </figure>
         </section>
         <section className={headerSectionBottom}>
-           <FilterButton location={LocationEnum.HELSINKI} guest='Add Guest' />
+           <FilterButton location={LocationEnum.HELSINKI} guest='Add Guest' setIsShow={setIsShow} />
         </section>
+        <FilterModal setIsShow={setIsShow} isShow={isShow}/>
     </header>
   )
 }

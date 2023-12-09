@@ -1,14 +1,15 @@
 import React from 'react'
 import { classes, style } from 'typestyle'
 import { mulishFont, redColor } from '../theme'
-import { SearchIcon } from '../assets/SearchIcon'
+import { SearchIcon } from '../assets'
 import { LocationEnum } from '../schemas'
 
 interface FilterButtoProps{
     location:LocationEnum,
-    guest:string
+    guest:string,
+    setIsShow: React.Dispatch<React.SetStateAction<boolean>>
 }
-export const FilterButton:React.FC<FilterButtoProps> = ({location, guest}) => {
+export const FilterButton:React.FC<FilterButtoProps> = ({location, guest, setIsShow}) => {
   return (
     <div className={filterButtonWrapper}>
         <div className={classes(locationSection, textAlignStyle)}>
@@ -21,7 +22,7 @@ export const FilterButton:React.FC<FilterButtoProps> = ({location, guest}) => {
                 {guest}
             </p>
         </div>
-        <div className={classes(searchSection, textAlignStyle)}>
+        <div onClick={()=>setIsShow(true)} className={classes(searchSection, textAlignStyle)}>
             <SearchIcon color={redColor} />
         </div>
     </div>

@@ -1,13 +1,13 @@
 import React from 'react'
 import { classes, media, style } from 'typestyle'
 import { CloseIcon } from '../assets'
+import { FilterForm, SearchButton } from '.'
 
 interface FilterModalProps{
     isShow:boolean,
     setIsShow:React.Dispatch<React.SetStateAction<boolean>>
 }
 export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow}) => {
-   
   return (
     <div className={classes(modalWrapper, style({display:isShow?'block':'none'}))}>
         <section className={modalContainer}>
@@ -17,8 +17,12 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow}) => {
                     <CloseIcon />
                 </figure> 
             </div>
+            <div className={modalMain}>
+                <FilterForm />
+            </div>
+            
             <div className={modalFooter}>
-
+                <SearchButton />
             </div>
         </section>
     </div>
@@ -71,12 +75,17 @@ const modalTitle = style(
     }
 )
 
+const modalMain = style(
+    {
+        width:'100%',
+        height:'auto',
+    }
+)
 const modalFooter = style(
     {
         width:'100%',
         height:'48px',
         display:'flex',
         justifyContent:'center',
-        backgroundColor:'red'
     }
 )

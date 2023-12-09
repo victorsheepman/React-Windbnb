@@ -2,18 +2,23 @@ import React from 'react'
 import { classes, style } from 'typestyle'
 import { mulishFont, redColor } from '../theme'
 import { SearchIcon } from '../assets/SearchIcon'
+import { LocationEnum } from '../schemas'
 
-export const FilterButton = () => {
+interface FilterButtoProps{
+    location:LocationEnum,
+    guest:string
+}
+export const FilterButton:React.FC<FilterButtoProps> = ({location, guest}) => {
   return (
     <div className={filterButtonWrapper}>
         <div className={classes(locationSection, textAlignStyle)}>
             <p className={classes(textStyle, style({color:'#333'}))}>
-                Helsinki, Finland
+               {location}
             </p>
         </div>
         <div className={classes(guestSection, textAlignStyle)}>
             <p className={classes(textStyle, style({color:'#BDBDBD'}))}>
-             Add guests
+                {guest}
             </p>
         </div>
         <div className={classes(searchSection, textAlignStyle)}>

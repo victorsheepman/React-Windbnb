@@ -1,8 +1,10 @@
 import React from 'react'
 import { media, style } from 'typestyle'
 import { FilterButton } from '../components/FilterButton'
+import { LocationEnum } from '../schemas'
 
 export const Header = () => {
+
   return (
     <header className={headerWrapper}>
         <section className={headerSectionLogo}>
@@ -11,7 +13,7 @@ export const Header = () => {
             </figure>
         </section>
         <section className={headerSectionBottom}>
-           <FilterButton />
+           <FilterButton location={LocationEnum.HELSINKI} guest='Add Guest' />
         </section>
     </header>
   )

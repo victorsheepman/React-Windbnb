@@ -5,7 +5,7 @@ import { SearchIcon } from '../assets'
 import { LocationEnum } from '../schemas'
 
 interface FilterButtoProps{
-    location:LocationEnum,
+    location:LocationEnum | undefined,
     guest:string,
     setIsShow: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -62,7 +62,8 @@ const searchSection = style(
         width:'53px',
         height:'100%',
         cursor:'pointer'
-    }
+    },
+   
 )
 
 const textAlignStyle = style(

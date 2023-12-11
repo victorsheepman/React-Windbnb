@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { media, style } from 'typestyle'
 import { FilterButton } from '../components/FilterButton'
-import { LocationEnum } from '../schemas'
 import { FilterModal } from '../components/FilterModal'
+import { WindbnbContext } from '../context'
 
 export const Header = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
+    const context = useContext(WindbnbContext)
   return (
     <header className={headerWrapper}>
         <section className={headerSectionLogo}>
@@ -14,7 +15,7 @@ export const Header = () => {
             </figure>
         </section>
         <section className={headerSectionBottom}>
-           <FilterButton location={LocationEnum.HELSINKI} guest='Add Guest' setIsShow={setIsShow} />
+           <FilterButton location={context?.locationContext} guest='Add Guest' setIsShow={setIsShow} />
         </section>
         <FilterModal setIsShow={setIsShow} isShow={isShow}/>
     </header>

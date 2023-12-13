@@ -1,6 +1,7 @@
 import React from 'react'
 import { media, style } from 'typestyle'
 import { monserratFont } from '../theme'
+import { CardStay } from '../components'
 
 export const MainStay = () => {
     const list = [1,2,3,4,5,6]
@@ -13,9 +14,7 @@ export const MainStay = () => {
         <section className={mainStayList}>
             {
                 list.map((item,index)=>(
-                    <div key={index}className={style({width: '350px',
-                    height: '313px',
-                    flexShrink: 0, backgroundColor:'red'})}/>
+                   <CardStay key={index}/>
                 ))
             }
                 
@@ -85,7 +84,8 @@ const mainStayList = style(
         flexDirection:'column',
         alignItems:'center',
         gap:'32px'  ,
-        marginBottom:'101px'
+        marginBottom:'101px',
+        
     },
     media(
         {

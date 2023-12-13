@@ -3,33 +3,57 @@ import { classes, media, style } from 'typestyle'
 import { blackColor, darkGrayColor, lightGrayColor, monserratFont } from '../theme'
 import { StarIcon } from '../assets'
 
-export const CardStay = () => {
+interface CardStayProps{
+    photo:string,
+    title:string,
+    rating:number,
+    beds:number,
+    type:string,
+    host:boolean
+}
+export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type,host}) => {
   return (
     <div className={cardWrapper}>
         <figure className={cardFigure}>
-
+            <img src={photo} alt="" />
         </figure>
         <section className={cardDetail}>
-            <span className={classes(cardHost, cardHostText)}>
-                Super host
-            </span>
+            {
+                host?
+                <span className={classes(cardHost, cardHostText)}>
+                    Super host
+                </span>:
+                null
+            }
+           
             <p 
                 className={
                     classes(
                         cardDetailText, 
-                        marginText
+                        style(
+                            {
+                                marginRight:host?'38px':'135px',
+                            },
+                            media(
+                                {minWidth:1366},
+                                {
+                                    
+                                    marginRight:'50%'
+                                }
+                            )
+                        )
                     )
                 }
             >
-                Entire apartment . 2 beds
+                {type} . {beds} beds
             </p>
            
                 
                 <StarIcon />
-                <p className={classes(cardDetailText, style({color:darkGrayColor, marginLeft:'4.4px'}))}>4.40</p>
+                <p className={classes(cardDetailText, style({color:darkGrayColor, marginLeft:'4.4px'}))}>{rating}</p>
           
         </section>
-        <h5 className={cardTitle}>Stylist apartment in center of the city</h5>
+        <h5 className={cardTitle}>{title}</h5>
     </div>
   )
 }
@@ -81,20 +105,6 @@ const cardDetail = style(
     )
 )
 
-const marginText = style(
-    {
-        marginLeft:'9.7px',
-        marginRight:'38px',
-    },
-    media(
-        {minWidth:1366},
-        {
-            marginLeft:'11px',
-            marginRight:'83px'
-        }
-    )
-)
-
 const cardHost = style(
     {
         width:'88px',
@@ -104,8 +114,15 @@ const cardHost = style(
         display:'flex',
         alignItems:'center',
        justifyContent:'center',
-        border:`1px solid ${darkGrayColor}`
-    }
+        border:`1px solid ${darkGrayColor}`,
+        marginRight:'9.7px',
+    },
+    media(
+        {minWidth:1366},
+        {
+            marginRight:'11px'
+        }
+    )
 )
 
 const cardHostText = style(

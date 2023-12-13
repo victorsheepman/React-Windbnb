@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { style } from 'typestyle'
 import { SearchIcon } from '../assets'
 import { redColor } from '../theme'
+import { WindbnbContext } from '../context'
+import { LocationEnum } from '../schemas'
 
-export const SearchButton = () => {
+interface SearchButtonProps{
+  locationSelected:LocationEnum
+}
+export const SearchButton:React.FC<SearchButtonProps> = ({locationSelected}) => {
+  const context = useContext(WindbnbContext)
   return (
-    <button className={buttonStyle}>
+    <button className={buttonStyle} onClick={()=>context?.handlerState(locationSelected)}>
         <SearchIcon color='#FFFFFFFF' />
         Search
     </button>

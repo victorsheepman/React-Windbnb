@@ -1,17 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import { classes, media, style } from 'typestyle'
 import { CloseIcon } from '../assets'
 import { FilterForm, SearchButton } from '.'
 
 import { LocationList } from './LocationList'
-import { WindbnbContext } from '../context'
+import { LocationEnum } from '../schemas'
 
 interface FilterModalProps{
+    currentLocation:LocationEnum,
     isShow:boolean,
     setIsShow:React.Dispatch<React.SetStateAction<boolean>>
 }
-export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow}) => {
-   const context = useContext(WindbnbContext)
+export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, currentLocation}) => {
+   const [locationSelected, setLocationSelected] = useState<LocationEnum>(currentLocation)
   return (
     <div className={classes(modalWrapper, style({display:isShow?'block':'none'}))}>
         <section className={modalContainer}>
@@ -22,11 +23,11 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow}) => {
                 </figure> 
             </div>
             <div className={modalMain}>
-                <FilterForm location={context?.locationContext}/>
+                <FilterForm location={locationSelected}/>
             </div>
-           <LocationList />
+           <LocationList setLocationSelected={setLocationSelected} />
             <div className={modalFooter}>
-                <SearchButton />
+                <SearchButton locationSelected={locationSelected} />
             </div>
         </section>
     </div>

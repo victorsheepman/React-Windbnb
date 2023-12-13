@@ -4,7 +4,10 @@ import { PlaceIcon } from '../assets'
 import { LocationEnum } from '../schemas'
 import { mulishFont } from '../theme'
 
-export const LocationList = () => {
+interface LocationListProps{
+    setLocationSelected: React.Dispatch<React.SetStateAction<LocationEnum>>
+}
+export const LocationList:React.FC<LocationListProps> = ({setLocationSelected}) => {
     const locationsData:Array<LocationEnum> = [
         LocationEnum.HELSINKI,
         LocationEnum.OULU,
@@ -15,7 +18,7 @@ export const LocationList = () => {
     <ul className={locationList}>
         {
             locationsData.map((item, i)=>(
-                <li key={i} className={classes(locationItem, locationItemFont)}>
+                <li key={i} className={classes(locationItem, locationItemFont)} onClick={()=>setLocationSelected(item)}>
                     <PlaceIcon /> 
                     {item}
                 </li>

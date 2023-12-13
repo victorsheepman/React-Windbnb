@@ -5,7 +5,7 @@ import { SearchButton } from '.'
 import { LocationEnum } from '../schemas'
 
 interface FilterFormProps{
-    location: LocationEnum | undefined
+    location: LocationEnum
 }
 
 export const FilterForm:React.FC<FilterFormProps> = ({location}) => {
@@ -21,7 +21,7 @@ export const FilterForm:React.FC<FilterFormProps> = ({location}) => {
         </label>
         
         <section className={classes(buttonFormSection)}>
-            <SearchButton />
+            <SearchButton locationSelected={location} />
         </section>
 
         

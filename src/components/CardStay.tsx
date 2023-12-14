@@ -17,7 +17,16 @@ export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type
         <figure className={cardFigure}>
             <img src={photo} className={style({width:'100%', height:'100%', objectFit:'cover', borderRadius:'24px',})} alt="" />
         </figure>
-        <section className={cardDetail}>
+        <section className={
+            classes(
+                cardDetail,
+                style(
+                    {
+                        justifyContent:host? 'unset':'space-between'
+                    }
+                )
+            )
+        }>
             {
                 host?
                 <span className={classes(cardHost, cardHostText)}>
@@ -38,7 +47,7 @@ export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type
                                 {minWidth:1366},
                                 {
                                     
-                                    marginRight:host ?'30%':'47%'
+                                    marginRight:host ?'30%':'0%'
                                 }
                             )
                         )
@@ -48,10 +57,10 @@ export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type
                 {type} . {beds ? beds : 0} beds
             </p>
            
-                
-                <StarIcon />
-                <p className={classes(cardDetailText, style({color:darkGrayColor, marginLeft:'4.4px'}))}>{rating}</p>
-          
+                <div className={style({display:'flex', alignItems:'center', gap:'4px'})} >
+                    <StarIcon />
+                    <p className={classes(cardDetailText, style({color:darkGrayColor, marginLeft:'4.4px'}))}>{rating}</p>
+                </div>
         </section>
         <h5 className={cardTitle}>{title}</h5>
     </div>

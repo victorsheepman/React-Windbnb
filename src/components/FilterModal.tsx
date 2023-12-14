@@ -13,6 +13,20 @@ interface FilterModalProps{
 }
 export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, currentLocation}) => {
    const [locationSelected, setLocationSelected] = useState<LocationEnum>(currentLocation)
+   const [keyState, setkeyState] = useState<number>(0)
+   let content = null;
+   switch (keyState) {
+    case 1: 
+        
+        content = <LocationList setLocationSelected={setLocationSelected} />
+        break;
+    case 2: 
+        content = <h1>hola</h1>
+        break;
+   
+    default:
+        break;
+   }
   return (
     <div className={classes(modalWrapper, style({display:isShow?'block':'none'}))}>
         <section className={modalContainer}>
@@ -23,9 +37,11 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
                 </figure> 
             </div>
             <div className={modalMain}>
-                <FilterForm location={locationSelected}/>
+                <FilterForm setkeyState={setkeyState} location={locationSelected}/>
             </div>
-           <LocationList setLocationSelected={setLocationSelected} />
+            <div className={ classes(modalList, style(media({minWidth:1366}, {justifyContent:keyState === 2? 'center':'unset'})))}>
+                {content}
+            </div>
             <div className={modalFooter}>
                 <SearchButton locationSelected={locationSelected} />
             </div>
@@ -42,6 +58,14 @@ const modalWrapper = style(
         bottom:0,
         right:0,
         backgroundColor: 'rgba(79, 79, 79, 0.40)',
+    }
+
+)
+const modalList = style(
+    {
+        width:'100%', 
+        height:'auto',
+        display:'flex'
     }
 )
 const modalContainer = style(

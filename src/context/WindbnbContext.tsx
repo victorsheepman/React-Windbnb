@@ -1,10 +1,13 @@
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
+import { ReactNode, createContext, useMemo, useState } from 'react'
 import { LocationEnum, Stay } from '../schemas';
 import data from '../../data'
 interface WindbnbContextType {
     locationContext:LocationEnum,
-    handlerState: (stateLocation?: LocationEnum) => void
-    stayList:Array<Stay>
+    isShowContext:boolean,
+    stayList:Array<Stay>,
+    handlerState: (stateLocation?: LocationEnum) => void,
+    setIsShowContext: React.Dispatch<React.SetStateAction<boolean>>
+    
 }
 
 type LocationPartial = Pick<Stay, 'city'| 'country'>
@@ -12,21 +15,24 @@ type LocationPartial = Pick<Stay, 'city'| 'country'>
 
 const defaultValue: WindbnbContextType = {
   locationContext: LocationEnum.HELSINKI,
+  isShowContext:false,
+  stayList:[],
+  setIsShowContext:()=>false,
   handlerState: () => {},
-  stayList:[] // Puedes proporcionar una función vacía o la lógica que necesites.
 }
 
 export const WindbnbContext = createContext<WindbnbContextType>(defaultValue)
 
 export const WindbnbContextProvider = ({ children }:{children:ReactNode}) => {
-    const [locationContext, setLocationContext] = useState<LocationEnum>(LocationEnum.HELSINKI);
+  const [isShowContext, setIsShowContext] = useState<boolean>(false)  
+  const [locationContext, setLocationContext] = useState<LocationEnum>(LocationEnum.HELSINKI);
 
     const handlerState = (stateLocation?:LocationEnum)=>{
       if (stateLocation) {
         setLocationContext(stateLocation)
+        setIsShowContext(false)
       }
     }
-    //
     const locationParser = (locationString: LocationEnum):LocationPartial=> {
       const parts = locationString.split(', ');
   
@@ -40,30 +46,14 @@ export const WindbnbContextProvider = ({ children }:{children:ReactNode}) => {
           throw new Error("Formato de cadena incorrecto");
       }
     }
-  
-    useEffect(() => {
-      console.log(locationContext);
-      
-    }, [locationContext])
-    
-    // pre contrato 
-      /* 
-        - location nunca esta vacio 
-        - gues puede ser cero
-      */
-    // post contrato
-
-    /*
-        - stayList no puede ser un array vacio
-    */
-
     const stayList:Array<Stay> = useMemo(() => {
       const location = locationParser(locationContext)
       const dataLocationFiltered = data.filter(i=> i.city.includes(location.city))  
+     
       return dataLocationFiltered
     }, [locationContext])
     return (
-      <WindbnbContext.Provider value={{ locationContext, handlerState, stayList }}>
+      <WindbnbContext.Provider value={{ locationContext, stayList, isShowContext, setIsShowContext, handlerState}}>
         {children}
       </WindbnbContext.Provider>
     );

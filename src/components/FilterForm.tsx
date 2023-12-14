@@ -6,16 +6,17 @@ import { LocationEnum } from '../schemas'
 
 interface FilterFormProps{
     location: LocationEnum
+    setkeyState: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const FilterForm:React.FC<FilterFormProps> = ({location}) => {
+export const FilterForm:React.FC<FilterFormProps> = ({location, setkeyState}) => {
   return (
     <div className={filterStyle}>
-        <label className={classes(label, labelTitle, labelLocation)} htmlFor="">
+        <label className={classes(label, labelTitle, labelLocation)} onClick={()=>setkeyState(1)}>
             LOCATION
             <input className={classes(inputValue, labelInput)} disabled  value={location}/>
         </label>
-        <label className={classes(label, labelTitle)} htmlFor="">
+        <label className={classes(label, labelTitle)} onClick={()=>setkeyState(2)}>
             GUEST
             <input className={classes(inputValue, labelInput)} placeholder='Add guests' disabled />
         </label>

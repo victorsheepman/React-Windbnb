@@ -7,7 +7,7 @@ interface CardStayProps{
     photo:string,
     title:string,
     rating:number,
-    beds:number,
+    beds:number | null,
     type:string,
     host:boolean
 }
@@ -15,7 +15,7 @@ export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type
   return (
     <div className={cardWrapper}>
         <figure className={cardFigure}>
-            <img src={photo} alt="" />
+            <img src={photo} className={style({width:'100%', height:'100%', objectFit:'cover', borderRadius:'24px',})} alt="" />
         </figure>
         <section className={cardDetail}>
             {
@@ -38,14 +38,14 @@ export const CardStay:React.FC<CardStayProps> = ({photo,title, rating, beds,type
                                 {minWidth:1366},
                                 {
                                     
-                                    marginRight:'50%'
+                                    marginRight:host ?'30%':'47%'
                                 }
                             )
                         )
                     )
                 }
             >
-                {type} . {beds} beds
+                {type} . {beds ? beds : 0} beds
             </p>
            
                 

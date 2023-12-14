@@ -1,10 +1,11 @@
-import React from 'react'
+import { useContext } from 'react'
 import { media, style } from 'typestyle'
 import { monserratFont } from '../theme'
 import { CardStay } from '../components'
+import { WindbnbContext } from '../context'
 
 export const MainStay = () => {
-    const list = [1,2,3,4,5,6]
+    const {stayList} = useContext(WindbnbContext)
   return (
     <div className={mainStayWrapper}>
         <section className={mainStayHeader}>
@@ -13,8 +14,15 @@ export const MainStay = () => {
         </section>
         <section className={mainStayList}>
             {
-                list.map((item,index)=>(
-                   <CardStay key={index}/>
+                stayList.map((item,index)=>(
+                   <CardStay 
+                        key={index} 
+                        title={item.title} 
+                        photo={item.photo} 
+                        type={item.type} 
+                        rating={item.rating} 
+                        beds={item.beds} 
+                        host={item.superHost} />
                 ))
             }
                 

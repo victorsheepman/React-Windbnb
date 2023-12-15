@@ -1,25 +1,25 @@
 import React from 'react'
 import { classes, style } from 'typestyle'
-import { mulishFont, redColor } from '../theme'
+import { blackColor, mulishFont, redColor } from '../theme'
 import { SearchIcon } from '../assets'
 import { LocationEnum } from '../schemas'
 
 interface FilterButtoProps{
     location:LocationEnum | undefined,
-    guest:string,
+    guest:number,
     setIsShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 export const FilterButton:React.FC<FilterButtoProps> = ({location, guest, setIsShow}) => {
   return (
     <div className={filterButtonWrapper}>
         <div className={classes(locationSection, textAlignStyle)}>
-            <p className={classes(textStyle, style({color:'#333'}))}>
+            <p className={classes(textStyle, style({color:blackColor}))}>
                {location}
             </p>
         </div>
         <div className={classes(guestSection, textAlignStyle)}>
-            <p className={classes(textStyle, style({color:'#BDBDBD'}))}>
-                {guest}
+            <p className={classes(textStyle, style({color: guest == 0 ?'#BDBDBD':blackColor}))}>
+                {guest == 0 ? 'Add Guest':guest}
             </p>
         </div>
         <div onClick={()=>setIsShow(true)} className={classes(searchSection, textAlignStyle)}>

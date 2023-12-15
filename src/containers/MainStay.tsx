@@ -10,10 +10,11 @@ export const MainStay = () => {
     <div className={mainStayWrapper}>
         <section className={mainStayHeader}>
             <h4 className={mainStayTitle}>Stays in Finland</h4>
-            <span className={mainStaySpan}>12+ stays</span>
+            <span className={mainStaySpan}>{stayList.length} stays</span>
         </section>
         <section className={mainStayList}>
             {
+                stayList.length ?
                 stayList.map((item,index)=>(
                    <CardStay 
                         key={index} 
@@ -23,7 +24,8 @@ export const MainStay = () => {
                         rating={item.rating} 
                         beds={item.beds} 
                         host={item.superHost} />
-                ))
+                )):
+                <h1 className={mainStayTitle}>No hay resultados</h1>
             }
                 
 

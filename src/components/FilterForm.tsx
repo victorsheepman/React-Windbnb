@@ -2,14 +2,15 @@ import React from 'react'
 import { classes, media, style } from 'typestyle'
 import { mulishFont } from '../theme'
 import { SearchButton } from '.'
-import { LocationEnum } from '../schemas'
+import { GuestQtyType, LocationEnum } from '../schemas'
 
 interface FilterFormProps{
-    location: LocationEnum
+    location: LocationEnum,
+    qtySeletected: GuestQtyType
     setkeyState: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const FilterForm:React.FC<FilterFormProps> = ({location, setkeyState}) => {
+export const FilterForm:React.FC<FilterFormProps> = ({location,qtySeletected, setkeyState}) => {
   return (
     <div className={filterStyle}>
         <label className={classes(label, labelTitle, labelLocation)} onClick={()=>setkeyState(1)}>
@@ -22,7 +23,7 @@ export const FilterForm:React.FC<FilterFormProps> = ({location, setkeyState}) =>
         </label>
         
         <section className={classes(buttonFormSection)}>
-            <SearchButton locationSelected={location} />
+            <SearchButton locationSelected={location} qtySeletected={qtySeletected} />
         </section>
 
         

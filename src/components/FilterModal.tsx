@@ -44,7 +44,7 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
                 </figure> 
             </div>
             <div className={modalMain}>
-                <FilterForm setkeyState={setkeyState} location={locationSelected}/>
+                <FilterForm setkeyState={setkeyState} location={locationSelected} qtySeletected={qtySelected}/>
             </div>
             <div className={ classes(modalList, style(media({minWidth:1366}, {justifyContent:keyState === 2? 'center':'unset'})))}>
                 {content}

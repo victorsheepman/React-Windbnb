@@ -6,6 +6,7 @@ interface WindbnbContextType {
     isShowContext:boolean,
     stayList:Array<Stay>,
     guestContext:GuestQtyType,
+    total:number,
     handlerState: (stateLocation?: LocationEnum, stateQty?:GuestQtyType) => void,
     setIsShowContext: React.Dispatch<React.SetStateAction<boolean>>
     
@@ -22,6 +23,7 @@ const defaultValue: WindbnbContextType = {
     adults:0,
     children:0
   },
+  total:0,
   setIsShowContext:()=>false,
   handlerState: () => {},
 }
@@ -30,12 +32,13 @@ export const WindbnbContext = createContext<WindbnbContextType>(defaultValue)
 
 export const WindbnbContextProvider = ({ children }:{children:ReactNode}) => {
   const [isShowContext, setIsShowContext] = useState<boolean>(false)  
+  const [total, setTotal] = useState<number>(0)
   const [locationContext, setLocationContext] = useState<LocationEnum>(LocationEnum.HELSINKI);
   const [guestContext, setGuestContext] = useState<GuestQtyType>({
     adults:0,
     children:0
    })
-
+   
     const handlerState = (stateLocation?:LocationEnum, stateQty?:GuestQtyType)=>{
       if (stateLocation) {
         setLocationContext(stateLocation)
@@ -68,17 +71,19 @@ export const WindbnbContextProvider = ({ children }:{children:ReactNode}) => {
     const stayList:Array<Stay> = useMemo(() => {
       const location = locationParser(locationContext)
       const totalGuest = sumGuest(guestContext)
+      setTotal(totalGuest)
 
       const dataLocationFiltered = data.filter(i=> i.city.includes(location.city))  
-     
+    
       if (totalGuest > 0) {
-        const dataGuestFiltered = data.filter(i=>i.maxGuests === totalGuest)
+        
+        const dataGuestFiltered = dataLocationFiltered.filter(i=>i.maxGuests >= totalGuest)
         return dataGuestFiltered
       }
       return dataLocationFiltered
     }, [locationContext, guestContext])
     return (
-      <WindbnbContext.Provider value={{ locationContext, stayList, isShowContext,guestContext, setIsShowContext, handlerState}}>
+      <WindbnbContext.Provider value={{ locationContext, stayList, isShowContext,guestContext,total, setIsShowContext, handlerState}}>
         {children}
       </WindbnbContext.Provider>
     );

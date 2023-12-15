@@ -6,7 +6,7 @@ import { WindbnbContext } from '../context'
 
 export const Header = () => {
    
-    const {locationContext, isShowContext, guestContext, setIsShowContext} = useContext(WindbnbContext)
+    const {locationContext, isShowContext, guestContext, total, setIsShowContext} = useContext(WindbnbContext)
   return (
     <header className={headerWrapper}>
         <section className={headerSectionLogo}>
@@ -15,7 +15,7 @@ export const Header = () => {
             </figure>
         </section>
         <section className={headerSectionBottom}>
-           <FilterButton location={locationContext} guest='Add Guest' setIsShow={setIsShowContext} />
+           <FilterButton location={locationContext} guest={total} setIsShow={setIsShowContext} />
         </section>
         <FilterModal setIsShow={setIsShowContext} isShow={isShowContext} currentLocation={locationContext} currentQty={guestContext}/>
     </header>

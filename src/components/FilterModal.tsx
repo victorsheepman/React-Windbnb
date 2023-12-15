@@ -4,8 +4,9 @@ import { CloseIcon } from '../assets'
 import { FilterForm, SearchButton } from '.'
 
 import { LocationList } from './LocationList'
-import { GuestEnum, LocationEnum } from '../schemas'
+import { GuestEnum, GuestQtyType, LocationEnum } from '../schemas'
 import { GuestQty } from './GuestQty'
+
 
 interface FilterModalProps{
     currentLocation:LocationEnum,
@@ -13,7 +14,11 @@ interface FilterModalProps{
     setIsShow:React.Dispatch<React.SetStateAction<boolean>>
 }
 export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, currentLocation}) => {
-   const [locationSelected, setLocationSelected] = useState<LocationEnum>(currentLocation)
+   const [qty, setQty] = useState<GuestQtyType>({
+    adults:0,
+    children:0
+   })
+    const [locationSelected, setLocationSelected] = useState<LocationEnum>(currentLocation)
    const [keyState, setkeyState] = useState<number>(0)
    let content = null;
    switch (keyState) {
@@ -22,7 +27,7 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
         content = <LocationList setLocationSelected={setLocationSelected} />
         break;
     case 2: 
-        content = <GuestQty type={GuestEnum.ADULTS} qty={0} />
+        content = <GuestQty type={GuestEnum.ADULTS} qty={qty.adults} setQty={setQty} />
         break;
    
     default:

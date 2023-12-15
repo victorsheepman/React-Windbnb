@@ -1,28 +1,38 @@
 import React from 'react'
 import { classes, style } from 'typestyle'
 import { blackColor, lightGrayColor, mulishFont } from '../theme'
-import { GuestEnum } from '../schemas'
+import { GuestEnum, GuestQtyType } from '../schemas'
 
 
 interface GuestQtyProps {
-    type:GuestEnum,
-    qty:number
+  type:GuestEnum,
+  qty:number,
+  setQty: React.Dispatch<React.SetStateAction<GuestQtyType>>
+  
 }
 
-export const GuestQty:React.FC<GuestQtyProps> = ({type, qty}) => {
-
+export const GuestQty:React.FC<GuestQtyProps> = ({type, qty, setQty}) => {
+  const handleQtyChange = (newQty: number) => {
+    if (newQty >= 0) {
+      setQty((prevQty) => ({
+        ...prevQty,
+        [type.toLowerCase()]: newQty,
+      }));   
+    }
+   
+  };
   return (
     <div className={guestWrapper}>
       <section className={guestHeader}>
         <h6 className={classes(guestText, style({color:blackColor, fontWeight:700}))}>{type}</h6>
         <span className={classes(guestText, style({color:'#BDBDBD', fontWeight:400}))}>
-          Ages 13 or above
+         {type === GuestEnum.ADULTS ? 'Ages 13 or above' : 'Ages 2-12'} 
         </span>
       </section>
       <section className={guestMain}>
-        <button className={guestButton}>-</button>
+        <button className={guestButton} onClick={()=>handleQtyChange(qty - 1)}>-</button>
         <p className={classes(guestText, style({color:blackColor, fontWeight:700}))}>{qty}</p>
-        <button className={guestButton}>+</button>
+        <button className={guestButton} onClick={()=>handleQtyChange(qty + 1)}>+</button>
       </section>
     </div>
   )

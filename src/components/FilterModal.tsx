@@ -27,7 +27,10 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
         content = <LocationList setLocationSelected={setLocationSelected} />
         break;
     case 2: 
-        content = <GuestQty type={GuestEnum.ADULTS} qty={qty.adults} setQty={setQty} />
+        content =   <div className={style({display:'flex', flexDirection:'column',gap:'52px'})}> 
+                        <GuestQty type={GuestEnum.ADULTS} qty={qty.adults} setQty={setQty} />
+                        <GuestQty type={GuestEnum.CHILDREN} qty={qty.children} setQty={setQty}/>
+                    </div>
         break;
    
     default:

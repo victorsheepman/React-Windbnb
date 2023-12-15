@@ -3,15 +3,16 @@ import { style } from 'typestyle'
 import { SearchIcon } from '../assets'
 import { redColor } from '../theme'
 import { WindbnbContext } from '../context'
-import { LocationEnum } from '../schemas'
+import { GuestQtyType, LocationEnum } from '../schemas'
 
 interface SearchButtonProps{
   locationSelected:LocationEnum
+  qtySeletected:GuestQtyType
 }
-export const SearchButton:React.FC<SearchButtonProps> = ({locationSelected}) => {
-  const context = useContext(WindbnbContext)
+export const SearchButton:React.FC<SearchButtonProps> = ({locationSelected, qtySeletected}) => {
+  const {handlerState} = useContext(WindbnbContext)
   return (
-    <button className={buttonStyle} onClick={()=>context?.handlerState(locationSelected)}>
+    <button className={buttonStyle} onClick={()=>handlerState(locationSelected, qtySeletected)}>
         <SearchIcon color='#FFFFFFFF' />
         Search
     </button>

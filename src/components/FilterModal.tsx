@@ -11,13 +11,11 @@ import { GuestQty } from './GuestQty'
 interface FilterModalProps{
     currentLocation:LocationEnum,
     isShow:boolean,
+    currentQty:GuestQtyType,
     setIsShow:React.Dispatch<React.SetStateAction<boolean>>
 }
-export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, currentLocation}) => {
-   const [qty, setQty] = useState<GuestQtyType>({
-    adults:0,
-    children:0
-   })
+export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, currentLocation, currentQty}) => {
+   const [qtySelected, setQtySelected] = useState<GuestQtyType>(currentQty)
     const [locationSelected, setLocationSelected] = useState<LocationEnum>(currentLocation)
    const [keyState, setkeyState] = useState<number>(0)
    let content = null;
@@ -28,8 +26,8 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
         break;
     case 2: 
         content =   <div className={style({display:'flex', flexDirection:'column',gap:'52px'})}> 
-                        <GuestQty type={GuestEnum.ADULTS} qty={qty.adults} setQty={setQty} />
-                        <GuestQty type={GuestEnum.CHILDREN} qty={qty.children} setQty={setQty}/>
+                        <GuestQty type={GuestEnum.ADULTS} qty={qtySelected.adults} setQty={setQtySelected} />
+                        <GuestQty type={GuestEnum.CHILDREN} qty={qtySelected.children} setQty={setQtySelected}/>
                     </div>
         break;
    
@@ -52,7 +50,7 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
                 {content}
             </div>
             <div className={modalFooter}>
-                <SearchButton locationSelected={locationSelected} />
+                <SearchButton locationSelected={locationSelected} qtySeletected={qtySelected} />
             </div>
         </section>
     </div>

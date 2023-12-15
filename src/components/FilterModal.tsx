@@ -4,7 +4,8 @@ import { CloseIcon } from '../assets'
 import { FilterForm, SearchButton } from '.'
 
 import { LocationList } from './LocationList'
-import { LocationEnum } from '../schemas'
+import { GuestEnum, LocationEnum } from '../schemas'
+import { GuestQty } from './GuestQty'
 
 interface FilterModalProps{
     currentLocation:LocationEnum,
@@ -21,7 +22,7 @@ export const FilterModal:React.FC<FilterModalProps> = ({isShow, setIsShow, curre
         content = <LocationList setLocationSelected={setLocationSelected} />
         break;
     case 2: 
-        content = <h1>hola</h1>
+        content = <GuestQty type={GuestEnum.ADULTS} qty={0} />
         break;
    
     default:

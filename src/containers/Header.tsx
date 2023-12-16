@@ -11,7 +11,7 @@ export const Header = () => {
     <header className={headerWrapper}>
         <section className={headerSectionLogo}>
             <figure className={headerLogo}>
-                <img className={style({width:'90%', height:'90%', objectFit:'contain'})} src="../../public/logo.png" alt=""  />
+                <img className={style({width:'90%', height:'90%', objectFit:'contain'})} src="/public/logo.png" alt=""  />
             </figure>
         </section>
         <section className={headerSectionBottom}>

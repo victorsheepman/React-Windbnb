@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export const SearchIcon = ({color="red"}:{color:string}) => {
   return (
